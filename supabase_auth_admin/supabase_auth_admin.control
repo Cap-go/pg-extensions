@@ -1,4 +1,4 @@
-# supabase_auth_apisupabase_is_adminkey extension
+# supabase_auth_admin extension
 comment = 'Supabase Auth tool to check if a user is an platform admin'
 default_version = '0.0.1'
 superuser = false

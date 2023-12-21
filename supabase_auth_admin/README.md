@@ -1,11 +1,11 @@
-# `supabase_is_admin`
+# `supabase_auth_admin`
 
 Useful extensions for Supabase Auth, allow users to be admin, this is useful to allow exceptions in RLS, for impersonation, or other use cases.
 
 
 
-- Source: https://github.com/Cap-go/pg-extensions/tree/main/supabase_is_admin
-- Docs: https://github.com/Cap-go/pg-extensions/tree/main/supabase_is_admin
+- Source: https://github.com/Cap-go/pg-extensions/tree/main/supabase_auth_admin
+- Docs: https://github.com/Cap-go/pg-extensions/tree/main/supabase_auth_admin
 - DbDev: https://database.dev/Cap-go/pg-extensions
 
 ## Usage
@@ -20,24 +20,24 @@ Functions
 ## Installation
 
 ```bash
-dbdev install riderx-supabase_is_admin --connection <CONNECTION_STRING>
+dbdev install riderx-supabase_auth_admin --connection <CONNECTION_STRING>
 ```
 
 or
 
 ```sql
-select * from dbdev('riderx-supabase_is_admin')
+select * from dbdev('riderx-supabase_auth_admin')
 ```
 
 then:
 
 ```sql
-create extension supabase_is_admin;
+create extension supabase_auth_admin;
 ```
 
 or to install in a separate schema (recommended):
 
 ```sql
-create extension supabase_is_admin with schema extensions;
+create extension supabase_auth_admin with schema extensions;
 ```
 
