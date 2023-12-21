@@ -6,7 +6,7 @@ Useful extensions for Supabase Auth, allow users to be admin, this is useful to 
 
 - Source: https://github.com/Cap-go/pg-extensions/tree/main/supabase_auth_admin
 - Docs: https://github.com/Cap-go/pg-extensions/tree/main/supabase_auth_admin
-- DbDev: https://database.dev/Cap-go/pg-extensions
+- DbDev: https://database.dev/martindonadieu/pg-extensions
 
 ## Usage
 

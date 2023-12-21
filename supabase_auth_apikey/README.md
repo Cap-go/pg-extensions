@@ -6,7 +6,7 @@ The goal is to allow users to authenticate with an API Key, when email/password 
 
 - Source: https://github.com/Cap-go/pg-extensions/tree/main/supabase_auth_apikey
 - Docs: https://github.com/Cap-go/pg-extensions/tree/main/supabase_auth_apikey
-- DbDev: https://database.dev/Cap-go/pg-extensions
+- DbDev: https://database.dev/martindonadieu/pg-extensions
 
 ## Usage
 
