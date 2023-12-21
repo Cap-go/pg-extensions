@@ -13,8 +13,8 @@ reset:
 
 .PHONY: tle.install
 tle.install: \
-	tle.install.pg_idkit \
-	tle.install.is_even
+	tle.install.supabase_is_admin \
+	tle.install.supabase_auth_apikey
 	@echo "\n\nDone!"
 
 tle.install.%:
