@@ -52,7 +52,7 @@ ALTER TABLE ONLY "public"."apikeys"
 
 ALTER TABLE "public"."apikeys" ENABLE ROW LEVEL SECURITY;
 
-ALTER POLICY "Enable all for user based on user_id"
+CREATE POLICY "Enable all for user based on user_id"
 ON "public"."apikeys"
 TO authenticated
 USING (auth.uid() = user_id)
@@ -71,48 +71,49 @@ End;
 $$;
 
 CREATE OR REPLACE FUNCTION "public"."create_apikey"("user_id" "uuid", "permission" "public"."key_permission") RETURNS "public"."apikeys"
-		LANGUAGE "plpgsql" SECURITY DEFINER
-		AS $$
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    AS $$
 DECLARE
-	new_apikey "public"."apikeys";
+    new_apikey "public"."apikeys";
 BEGIN
-	new_apikey := (INSERT INTO apikeys (user_id, permission, key)
-		VALUES (user_id, permission, md5(random()::text || clock_timestamp()::text)::uuid)
-		RETURNING *);
-	RETURN new_apikey;
+    INSERT INTO apikeys ("user_id", "key", "permission")
+    VALUES (user_id, md5(random()::text || clock_timestamp()::text)::uuid, permission)
+    RETURNING * INTO new_apikey;
+    
+    RETURN new_apikey;
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION "public"."create_apikey"("permission", "public"."key_permission") RETURNS "public"."apikeys"
-		LANGUAGE "plpgsql"
-		AS $$
+CREATE OR REPLACE FUNCTION "public"."create_apikey"("permission" "public"."key_permission") RETURNS "public"."apikeys"
+    LANGUAGE "plpgsql"
+    AS $$
 DECLARE
-	new_apikey "public"."apikeys";
+    new_apikey "public"."apikeys";
 BEGIN
-return create_apikey(auth.uid(), permission);
+    RETURN create_apikey(auth.uid(), permission);
 END;
 $$;
 
 
 CREATE OR REPLACE FUNCTION "public"."delete_apikey"("apikey" "text") RETURNS boolean
-		LANGUAGE "plpgsql" SECURITY DEFINER
-		AS $$
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    AS $$
 BEGIN
-	DELETE FROM apikeys WHERE key=apikey;
-	RETURN true;
+    DELETE FROM apikeys WHERE key=apikey;
+    RETURN true;
 END;
 $$;
 
 CREATE OR REPLACE FUNCTION "public"."get_user_id"("apikey" "text") RETURNS "uuid"
     LANGUAGE "plpgsql" SECURITY DEFINER
     AS $$
-Declare  
- is_found uuid;
-Begin
-  SELECT user_id
-  INTO is_found
-  FROM apikeys
-  WHERE key=apikey;
-  RETURN is_found;
-End;  
+DECLARE  
+    is_found uuid;
+BEGIN
+    SELECT user_id
+    INTO is_found
+    FROM apikeys
+    WHERE key=apikey;
+    RETURN is_found;
+END;  
 $$;
