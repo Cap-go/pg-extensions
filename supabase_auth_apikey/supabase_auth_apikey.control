@@ -1,4 +1,4 @@
 # supabase_auth_apikey extension
 comment = 'Supabase Auth with API Key instead of JWT'
-default_version = '0.0.1'
+default_version = '0.0.2'
 superuser = false

@@ -24,7 +24,7 @@
 
 CREATE TYPE "public"."key_permission" AS ENUM (
     'read',
-    'write',
+    'write'
 );
 
 CREATE TABLE "public"."apikeys" (
